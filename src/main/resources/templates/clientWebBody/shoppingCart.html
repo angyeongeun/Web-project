@@ -37,41 +37,69 @@
 
                             <!-- Card -->
                             <div class="card wish-list mb-3">
-                                <div class="card-body">
-                                                            <!--아래에 아이템 수량써야함-->
-                                    <h5 class="mb-4">Cart (<span>Ajax하기</span> items)</h5>
+                                <br>
+                                <h5 align="center" class="mb-4">Cart (<span>Ajax하기</span> n개 items)</h5>
 
-                                    <!--여기서부터 for each로 돌려서 장바구니 추가되게 해야함-->
-                                    <div class="row mb-4">
+
+
+
+                                <!--여기서부터 for each로 돌려서 장바구니 추가되게 해야함-->
+                                <div class="card-body" th:each="cart : ${cartList}">
+
+                                <article id="cart"
+
+                                         th:data-name="${cart.productName}"
+                                         th:data-price="${cart.productPrice}"
+                                         th:data-image="${cart.image}"
+                                         th:data-userEmail="${cart.userEmail}"
+                                         th:data-amount="${cart.amount}"
+                                />
+                                    <!--데이터를 자바스크립으로 보내기-->
+                                    <!--<input type="hidden" class="cartData"
+                                       th:data-id="${cart.cartId}"
+                                       th:data-name="${cart.productName}"
+                                       th:data-price="${cart.productPrice}"
+                                       th:data-image="${cart.image}"
+                                       th:data-userEmail="${cart.userEmail}"
+                                       th:data-amount="${cart.amount}"
+                                    >&lt;!&ndash;!--데이터를 자바스크립으로 보내기-->
+
+                                    <div class="row mb-4" >
                                         <div class="col-md-5 col-lg-3 col-xl-3">
                                             <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                                <img class="img-fluid w-100"
-                                                     src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
-                                                <a href="#!">
-                                                    <div class="mask waves-effect waves-light">
-                                                        <img class="img-fluid w-100"
-                                                             src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
-                                                        <div class="mask rgba-black-slight waves-effect waves-light"></div>
-                                                    </div>
-                                                </a>
+                                                <input type="checkbox" class="chBox"
+                                                       checked
+                                                       th:id="cartNum+${cart.cartId}"
+                                                       th:data-id="${cart.cartId}"
+                                                >
+                                                <img th:src="@{'/img/product/'+${cart.image}}" >
                                             </div>
                                         </div>
                                         <div class="col-md-7 col-lg-9 col-xl-9">
                                             <div>
                                                 <div class="d-flex justify-content-between">
                                                     <div>
-                                                        <h5>Blue denim shirt</h5>
-                                                        <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                                                        <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                                                        <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                                                        <span th:text="${cart.store}"/><br>
+                                                        <h5> <span th:text="${cart.productName}"/>  </h5>
+                                                        <!--                                                        <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
+                                                                                                                <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
+                                                                                                                <p class="mb-3 text-muted text-uppercase small">Size: M</p>-->
                                                     </div>
                                                     <div>
-                                                        <div class="def-number-input number-input safari_only mb-0 w-100">
-                                                            <button style="width:10pt;height:10pt;" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                                    class="minus"></button>
-                                                            <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                            <button style="width:10pt;height:10pt;" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                                    class="plus"></button>
+                                                        <div class="def-number-input number-input safari_only mb-0 w-100" >
+
+                                                                <div class="pro-qty">
+
+                                                                    <input type="text" class="amount" value="1">
+
+                                                                </div>
+<!--                                                            <button style="width:10pt;height:10pt;" class="minus"
+                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                                    th:onclick="|javascript:calc('${cart.productPrice}')|"
+                                                            ></button>
+                                                            <input class="quantity"  min="0"  id="quantity" name="quantity" value="1" type="number">
+                                                            <button style="width:10pt;height:10pt;"
+                                                                    class="plus"></button>-->
                                                         </div>
 
                                                     </div>
@@ -81,16 +109,21 @@
                                                         <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
                                                                 class="fas fa-trash-alt mr-1"></i> 장바구니에서 빼기 </a>
                                                     </div>
-                                                    <p class="mb-0"><span><strong>$17.99</strong></span></p>
+                                                    <p class="mb-0"><span><strong>
+                                                        <input type="hidden" class="productPrice" th:value="${cart.productPrice}">
+                                                        <span th:align="center" th:text="${cart.productPrice}"/>
+                                                    </strong></span></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
                                     <!--여기까지 for each 돌릴 문장임-->
 
 
 
-                                </div>
+
                             </div>
                             <!-- Card -->
 
@@ -111,7 +144,7 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                             물품 가격
-                                            <span>(Ajax하기)원</span>
+                                            <span id="productTot">(Ajax하기)원</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                             배달비
@@ -121,11 +154,11 @@
                                             <div>
                                                 <strong>총 결제금액</strong>
                                             </div>
-                                            <span><strong>(Ajax하기)원</strong></span>
+                                            <span ><strong id="payTot">(Ajax하기)원</strong></span>
                                         </li>
                                     </ul>
 
-                                    <button type="button" class="btn btn-success btn-block waves-effect waves-light">결제하기</button>
+                                    <button type="button" id="payBtn" class="btn btn-success btn-block waves-effect waves-light">결제하기</button>
 
                                 </div>
                             </div>
@@ -156,6 +189,95 @@
 
 
 <footer th:replace="clientWeb/footer :: footerFragment"></footer>
+<script type="text/javascript" th:inline="javascript">
+
+    var payTot;
+    var tot=0;
+    var cartList = [[${cartList}]];
+
+    $(document).ready(function() {
+
+        for (i = 0; i < cartList.length; i++) {
+/*          alert(cartList[i].productName);*/
+            tot += (cartList[i].productPrice*cartList[i].amount); //
+
+            //alert(tot);
+        }
+
+        payTot = tot+5000;
+
+        //alert($(this).data('cartId'));
+
+        //total amount of에 뿌리기
+        $('#productTot').text(tot);
+
+        $('#payTot').text(payTot);
+
+
+        $('.dec').click(function() {
+            //alert('물품 감소');
+
+        });
+
+        $('.inc').click(function() {
+            //alert('물품 증가');
+
+        });
+
+
+        $('#chBox').click(function() {
+            alert($('#chBox').data('cartId'));
+        });
+
+        $('#payBtn').click(function() {
+
+            //1. 체크박스만 추출
+                    for (var i = 0; i < cartList.length; i++) {
+
+                        var chBox = document.getElementById('cartNum'+(i+1));
+                        alert(chBox.dataset.id) ;
+
+                        /*if($("input:checkbox[name='cartNum'+"+i+"]").is(":checked") == true) {
+
+                    }*/
+                }
+
+            var checkArr = new Array();
+
+//            var article = document.getElementById('cart');
+
+
+/*            $("input[class='chBox']:checked").each(function () {
+
+                alert(chBox.dataset.id) ;
+//                alert(article.dataset.name) ;
+
+            });*/
+
+            //2.DB에 주문서 저장
+
+            /*            $.ajax({
+                url: "/clientWeb/pushOrder",
+                data: {test:'test'},
+                type: "POST",
+                dataType: "json"
+            }).done(function(json) {
+                alert('주문서가 제출되었습니다.')
+            }).error(function(xhr, status, errorThrown) {
+                alert(xhr.status);
+                alert(errorThrown);
+            });
+
+        });*/
+        });
+
+    });
+
+
+
+
+
+</script>
 
 
 </body>

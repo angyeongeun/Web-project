@@ -3,8 +3,8 @@ package com.cartrapido.main.config.auth;
 
 import com.cartrapido.main.config.auth.dto.OAuthAttributes;
 import com.cartrapido.main.config.auth.dto.SessionUser;
-import com.cartrapido.main.domain.Member;
-import com.cartrapido.main.domain.MemberRepository;
+import com.cartrapido.main.domain.entity.Member;
+import com.cartrapido.main.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -54,12 +54,12 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         //아마 재 로그인시 address값 null로 들어가 문제 있을 것!
         if(httpSession.getAttribute("address") != null){
-             user = userRepository.findByEmail(attributes.getEmail())
+            user = userRepository.findByEmail(attributes.getEmail())
                     .map(entity -> entity.update(attributes.getName(), (String)httpSession.getAttribute("address")))
                     .orElse(attributes.toEntity((String)httpSession.getAttribute("address")));
 
         }else{
-             user = userRepository.findByEmail(attributes.getEmail())
+            user = userRepository.findByEmail(attributes.getEmail())
                     .map(entity -> entity.update(attributes.getName()))
                     .orElse(attributes.toEntity());
 

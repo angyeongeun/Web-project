@@ -1,0 +1,60 @@
+
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<!-- HEADER -->
+<div th:insert="common/header.html" id="header"></div>
+<nav th:replace="common/sidebar.html"></nav>
+
+<br>
+<table>
+    <thead>
+    <tr>
+        <th class="one wide">스토어</th>
+        <th class="one wide">카테고리</th>
+        <th class="one wide">제품 코드</th>
+        <th class="one wide">제품 사진</th>
+        <th class="ten wide">제품명</th>
+        <th class="two wide">단가</th>
+        <th class="three wide">수량</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="board : ${boardList}">
+        <td>
+            <span th:text="${board.store}"></span>
+        </td>
+        <td>
+            <span th:text="${board.category}"></span>
+        </td>
+        <td>
+            <span th:text="${board.productId}"></span>
+        </td>
+        <td>
+            <img width="50" height="50" th:src="@{'/storage/'+${board.image}}">
+        </td>
+        <td>
+            <a th:href="@{'/post/' + ${board.productId}}">
+                <span th:text="${board.productName}"></span>
+            </a>
+        </td>
+        <td>
+            <span th:text="${board.productPrice}"></span>
+        </td>
+        <td>
+            <span th:text="${board.productQty}"></span>
+        </td>
+<!--    <td>
+            <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+        </td>-->
+    </tr>
+    </tbody>
+</table>
+
+<!--<a th:href="@{/post}">글쓰기</a>-->
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer"></div>
+</body>
+</html>

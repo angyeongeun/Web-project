@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>clientWebLayout</title>
+
+    <header th:replace="clientWeb/header :: headerFragment"/>
+
+</head>
+<body>
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" style="background: #1e7e34">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2><span th:text="${mart}"/></h2>
+                    <!--..---------------------------.............-->
+
+                    <!--....................-->
+                    <div class="breadcrumb__option">
+                        <a href="./index">Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+
+            <!-- clientSidebar-->
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Department</h4>
+                        <ul>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/meat'}">Fresh Meat</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/vegetables'}">Vegetables</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/fruit'}">Fresh Fruit & Berries</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/nut'}">Nut Gifts</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/ocean'}">Ocean Foods</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/eggs'}">Butter & Eggs</a></li>
+                            <li><a th:href="@{'/clientMart/'+${mart}+'/fastfood'}">Fastfood</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--clientSidebar 끝-->
+
+            <!--filter-->
+            <div class="col-lg-9 col-md-7">
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span th:text="${products.totalElements}"></span> Products found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--filter 끝-->
+
+                <!-- 제품 데이터 시작-->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6" th:each="product : ${productList}">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg">
+                                <a href="#" data-toggle="modal" data-target="#myModal" class="modaldata"
+                                   th:data-id="${product.productId}"
+                                   th:data-name="${product.productName}"
+                                   th:data-price="${product.productPrice}"
+                                   th:data-image="${product.image}"
+                                   th:data-content="${product.productContent}"
+                                >
+                                    <img th:src="@{'/img/product/'+${product.image}}"></a>
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li th:onclick="|javascript:putInCart('${product.productId}')|">
+                                        <a href="#">
+                                            <i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><span th:text="${product.productName}" data-toggle="modal" data-target="#myModal"/>
+                                </h6>
+                                <h5><span th:text="${product.productPrice}"/>원</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--모달-->
+                    <!--<th:block th:include="clientWeb/productModal.html" ></th:block>-->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span></button>
+
+                                </div>
+
+                                <div class="modal-body">
+                                    <!--model 내용-->
+                                    <section class="product-details spad">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="product__details__pic">
+                                                        <div class="product__details__pic__item">
+                                                            <img class="product__details__pic__item--large"
+                                                                 alt="">
+                                                        </div>
+                                                        <!--                                                        <div class="product__details__pic__slider owl-carousel">
+                                                                                                                    <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                                                                                                                         src="/img/product/details/thumb-1.jpg" alt="">
+                                                                                                                    <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                                                                                                                         src="/img/product/details/thumb-2.jpg" alt="">
+                                                                                                                    <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                                                                                                                         src="/img/product/details/thumb-3.jpg" alt="">
+                                                                                                                    <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                                                                                                                         src="/img/product/details/thumb-4.jpg" alt="">
+                                                                                                                </div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="product__details__text">
+                                                        <h3 class="product-name"></h3>
+                                                        <div class="product__details__rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half-o"></i>
+                                                            <span>(18 reviews)</span>
+                                                        </div>
+                                                        <div class="product__details__price">
+                                                            <span class="product-price">원</span>
+                                                        </div>
+                                                        <p><span class="product-content"></span></p>
+                                                        <div class="product__details__quantity">
+                                                            <div class="quantity">
+                                                                <div class="pro-qty">
+                                                                    <input type="text" value="1">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                                                        <a href="#" class="heart-icon"><span
+                                                                class="icon_heart_alt"></span></a>
+                                                        <ul>
+                                                            <li><b>Availability</b> <span>In Stock</span></li>
+                                                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span>
+                                                            </li>
+                                                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                                                            <li><b>Share on</b>
+                                                                <div class="share">
+                                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="product__details__tab">
+                                                        <ul class="nav nav-tabs" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab"
+                                                                   href="#tabs-1" role="tab"
+                                                                   aria-selected="true">Description</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#tabs-2"
+                                                                   role="tab"
+                                                                   aria-selected="false">Information</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#tabs-3"
+                                                                   role="tab"
+                                                                   aria-selected="false">Reviews <span>(1)</span></a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                                                <div class="product__details__tab__desc">
+                                                                    <h6>Products Infomation</h6>
+                                                                    <p>Vestibulum ac diam sit amet quam vehicula
+                                                                        elementum sed sit amet dui.
+                                                                        Pellentesque in ipsum id orci porta dapibus.
+                                                                        Proin eget tortor risus. Vivamus
+                                                                        suscipit tortor eget felis porttitor volutpat.
+                                                                        Vestibulum ac diam sit amet quam
+                                                                        vehicula elementum sed sit amet dui. Donec
+                                                                        rutrum congue leo eget malesuada.
+                                                                        Vivamus suscipit tortor eget felis porttitor
+                                                                        volutpat. Curabitur arcu erat,
+                                                                        accumsan id imperdiet et, porttitor at sem.
+                                                                        Praesent sapien massa, convallis a
+                                                                        pellentesque nec, egestas non nisi. Vestibulum
+                                                                        ac diam sit amet quam vehicula
+                                                                        elementum sed sit amet dui. Vestibulum ante
+                                                                        ipsum primis in faucibus orci luctus
+                                                                        et ultrices posuere cubilia Curae; Donec velit
+                                                                        neque, auctor sit amet aliquam
+                                                                        vel, ullamcorper sit amet ligula. Proin eget
+                                                                        tortor risus.</p>
+                                                                    <p>Praesent sapien massa, convallis a pellentesque
+                                                                        nec, egestas non nisi. Lorem
+                                                                        ipsum dolor sit amet, consectetur adipiscing
+                                                                        elit. Mauris blandit aliquet
+                                                                        elit, eget tincidunt nibh pulvinar a. Cras
+                                                                        ultricies ligula sed magna dictum
+                                                                        porta. Cras ultricies ligula sed magna dictum
+                                                                        porta. Sed porttitor lectus
+                                                                        nibh. Mauris blandit aliquet elit, eget
+                                                                        tincidunt nibh pulvinar a.
+                                                                        Vestibulum ac diam sit amet quam vehicula
+                                                                        elementum sed sit amet dui. Sed
+                                                                        porttitor lectus nibh. Vestibulum ac diam sit
+                                                                        amet quam vehicula elementum
+                                                                        sed sit amet dui. Proin eget tortor risus.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                                                <div class="product__details__tab__desc">
+                                                                    <h6>Products Infomation</h6>
+                                                                    <p>Vestibulum ac diam sit amet quam vehicula
+                                                                        elementum sed sit amet dui.
+                                                                        Pellentesque in ipsum id orci porta dapibus.
+                                                                        Proin eget tortor risus.
+                                                                        Vivamus suscipit tortor eget felis porttitor
+                                                                        volutpat. Vestibulum ac diam
+                                                                        sit amet quam vehicula elementum sed sit amet
+                                                                        dui. Donec rutrum congue leo
+                                                                        eget malesuada. Vivamus suscipit tortor eget
+                                                                        felis porttitor volutpat.
+                                                                        Curabitur arcu erat, accumsan id imperdiet et,
+                                                                        porttitor at sem. Praesent
+                                                                        sapien massa, convallis a pellentesque nec,
+                                                                        egestas non nisi. Vestibulum ac
+                                                                        diam sit amet quam vehicula elementum sed sit
+                                                                        amet dui. Vestibulum ante
+                                                                        ipsum primis in faucibus orci luctus et ultrices
+                                                                        posuere cubilia Curae;
+                                                                        Donec velit neque, auctor sit amet aliquam vel,
+                                                                        ullamcorper sit amet ligula.
+                                                                        Proin eget tortor risus.</p>
+                                                                    <p>Praesent sapien massa, convallis a pellentesque
+                                                                        nec, egestas non nisi. Lorem
+                                                                        ipsum dolor sit amet, consectetur adipiscing
+                                                                        elit. Mauris blandit aliquet
+                                                                        elit, eget tincidunt nibh pulvinar a. Cras
+                                                                        ultricies ligula sed magna dictum
+                                                                        porta. Cras ultricies ligula sed magna dictum
+                                                                        porta. Sed porttitor lectus
+                                                                        nibh. Mauris blandit aliquet elit, eget
+                                                                        tincidunt nibh pulvinar a.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                                                <div class="product__details__tab__desc">
+                                                                    <h6>Products Infomation</h6>
+                                                                    <p>Vestibulum ac diam sit amet quam vehicula
+                                                                        elementum sed sit amet dui.
+                                                                        Pellentesque in ipsum id orci porta dapibus.
+                                                                        Proin eget tortor risus.
+                                                                        Vivamus suscipit tortor eget felis porttitor
+                                                                        volutpat. Vestibulum ac diam
+                                                                        sit amet quam vehicula elementum sed sit amet
+                                                                        dui. Donec rutrum congue leo
+                                                                        eget malesuada. Vivamus suscipit tortor eget
+                                                                        felis porttitor volutpat.
+                                                                        Curabitur arcu erat, accumsan id imperdiet et,
+                                                                        porttitor at sem. Praesent
+                                                                        sapien massa, convallis a pellentesque nec,
+                                                                        egestas non nisi. Vestibulum ac
+                                                                        diam sit amet quam vehicula elementum sed sit
+                                                                        amet dui. Vestibulum ante
+                                                                        ipsum primis in faucibus orci luctus et ultrices
+                                                                        posuere cubilia Curae;
+                                                                        Donec velit neque, auctor sit amet aliquam vel,
+                                                                        ullamcorper sit amet ligula.
+                                                                        Proin eget tortor risus.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!--model 내용 끝-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--model 끝-->
+                    <!-- 제품 데이터 끝-->
+                </div>
+                <!--페이징-->
+                <div class="product__pagination pagination justify-content-center" >
+                    <a href="#"><i class="fa fa-long-arrow-left"></i></a>
+                    <a th:each="i : ${#numbers.sequence(startPage, endPage)}" th:text="${i}"></a>
+                    <a href="#"><i class="fa fa-long-arrow-right" ></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Product Section End -->
+
+<footer th:replace="clientWeb/footer :: footerFragment"/>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+    function putInCart(productId) {
+        alert('상품을 장바구니에 추가하였습니다.');
+
+        $.ajax({
+            url: "/clientMart/putInCart",
+            data: {productId:productId},
+            type: "POST",
+            dataType: "json"
+        }).done(function(json) {
+        }).error(function(xhr, status, errorThrown) {
+            alert(xhr.status);
+            alert(errorThrown);
+        });
+
+
+
+    }
+
+    $(document).ready(function () {
+        $('.modaldata').click(function () {
+            alert($(this).data('name'));
+            //$.ajax()
+            $('h3.product-name').text($(this).data('name'));
+            $('span.product-price').text($(this).data('price'));
+            $('span.product-content').text($(this).data('content'));
+            $('img.product__details__pic__item--large').attr('src', '/img/product/' + $(this).data('image'));
+        });
+    });
+
+</script>
+
+</body>
+</html>

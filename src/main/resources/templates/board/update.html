@@ -1,0 +1,74 @@
+
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<!-- HEADER -->
+<div th:insert="common/header.html" id="header"></div>
+
+<form name="updateForm" th:action="@{'/post/edit/' + ${productDto.productId}}" method="post">
+
+    <input type="hidden" name="_method" value="put"/>
+    <input type="hidden" name="productId" th:value="${productDto.productId}"/>
+
+    스토어 :
+    <select class="form-control selectric" id="store" name="store" th:selected="${productDto.store}">
+        <option></option>
+        <option value="emart">emart</option>
+        <option value="lottemart">lottemart</option>
+        <option value="homeplus">homeplus</option>
+        <option value="costco">costco</option>
+    </select>
+
+    카테고리 :
+    <select class="form-control selectric" id="category" name="category">
+<!--        <option th:each="productDto.category:${category}"
+                th:value="${productDto.category}"
+                th:selected="${category==productDto.category}"
+                th:text="${productDto.category}"></option>-->
+        <option value="과일">과일</option>
+        <option value="채소">채소</option>
+        <option value="쌀/잡곡/견과">쌀/잡곡/견과</option>
+        <option value="정육/계란류">정육/계란류</option>
+        <option value="수산물/건해산">수산물/건해산</option>
+    </select><br>
+    제품 코드 : <input type="text" name="productId" th:value="${productDto.productId}" readonly> <br>
+    제품명 : <input type="text" name="productName" th:value="${productDto.productName}"> <br>
+    단가 : <input type="text" name="productPrice" th:value="${productDto.productPrice}"> <br>
+    수량 : <input type="text" name="productQty" th:value="${productDto.productQty }"> <br>
+    상세 정보 <br>
+    <textarea name="productContent" th:text="${productDto.productContent}"></textarea><br>
+    제품 사진 : <input type="text" id="imgOrigin" th:value="${productDto.img}"><br>
+              <input type="file" name="img" id="img"><br>
+    <input type="button" id="updateBtn"value="수정">
+</form>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $('#updateForm').ready(function(){
+        document.getElementById('store').value ='${productDto.store}';
+        //document.getElementById('category').value ='${productDto.category}';
+        document.updateForm.category.value ='${productDto.category}';
+    });
+    $('#updateBtn').click(function(){
+
+       $.ajax({
+           type: 'post',
+           enctype: 'multipart/form-data',
+           processData: false,
+           contentType: false,
+           url: '/post',
+           data: new FormData($('#updateForm')[0]), //imageboardWriteForm안의 0번째 방에있는 data들을 모두 가져간다
+           success: function(data){
+               alert("이미지 업로드 완료");
+               location.href="/list";
+           },error: function(err){
+               console.log(err);
+           }
+       });
+    });
+</script>
+</body>
+</html>

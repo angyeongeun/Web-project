@@ -1,0 +1,59 @@
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<!-- HEADER -->
+<div th:insert="common/header.html" id="header"></div>
+<nav th:replace="common/sidebar.html"></nav>
+
+<form id="writeForm" enctype="multipart/form-data" method="post">
+
+    스토어 :
+    <select class="form-control selectric" id="store" name="store">
+        <option></option>
+        <option value="emart">emart</option>
+        <option value="lottemart">lottemart</option>
+        <option value="homeplus">homeplus</option>
+        <option value="costco">costco</option>
+    </select>
+    카테고리 :
+    <select class="form-control selectric" id="category" name="category">
+        <option></option>
+        <option value="과일">과일</option>
+        <option value="채소">채소</option>
+        <option value="쌀/잡곡/견과">쌀/잡곡/견과</option>
+        <option value="정육/계란류">정육/계란류</option>
+        <option value="수산물/건해산">수산물/건해산</option>
+    </select><br>
+
+    제품 코드 : <input type="text" name="productId"> <br>
+    제품명 : <input type="text" name="productName"> <br>
+    단가 : <input type="text" name="productPrice" placeholder="숫자만 입력해주세요"> <br>
+    수량 : <input type="text" name="productQty" placeholder="숫자만 입력해주세요"> <br>
+    상세 정보 : <textarea name="productContent"></textarea><br>
+    제품 사진 : <input type="file" name="img" id="img"><br>
+    <input type="button" id="writeBtn" value="등록">
+
+</form>
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="application/javascript">
+    $('#writeBtn').click(function() {
+        $.ajax({
+            type: 'post',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            url: '/post',
+            data: new FormData($('#writeForm')[0]), //imageboardWriteForm안의 0번째 방에있는 data들을 모두 가져간다
+            success: function(data){
+                alert("이미지 업로드 완료");
+                location.href="/list";
+            },error: function(err){
+                console.log(err);
+            }
+        });
+    });
+</script>
+</body>
+</html>

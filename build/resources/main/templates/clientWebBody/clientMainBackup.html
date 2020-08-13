@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>clientWebLayout</title>
+
+    <header th:replace="clientWeb/header :: headerFragment"></header>
+
+</head>
+<body>
+
+<!-- 내 반경에 있는 마트들 -->
+<section class="featured spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span th:text="${session.userAddress}"></span><br>
+                    <h2>근처에 있는 마트</h2>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--이마트 샘플 여기서부터 for each 돌려서 마트를 뿌려야함-->
+        <!--이마트-->
+        <div class="row featured__filter">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg borderCircle " data-setbg="img/mart/emart.png">
+                        <!--좋아요-->
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                        <!--좋아요-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--여기까지 foreach 돌려야할 부분-->
+
+
+        <!--롯데마트-->
+        <div class="row featured__filter">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic borderCircle set-bg" data-setbg="img/mart/lottemart.png">
+                        <!--좋아요-->
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                        <!--좋아요-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--홈플러스-->
+        <div class="row featured__filter">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg borderCircle" data-setbg="img/mart/homplus.jpg">
+                        <!--좋아요-->
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                        <!--좋아요-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+<!-- Featured Section End -->
+
+
+
+<footer th:replace="clientWeb/footer :: footerFragment"></footer>
+
+
+</body>
+</html>

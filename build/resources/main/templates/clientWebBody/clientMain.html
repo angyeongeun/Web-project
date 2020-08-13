@@ -13,6 +13,7 @@
 <body>
 
 <!-- 내 반경에 있는 마트들 -->
+<!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
         <div class="row">
@@ -21,32 +22,98 @@
                     <span th:text="${session.userAddress}"></span><br>
                     <h2>근처에 있는 마트</h2>
                 </div>
-
             </div>
         </div>
 
 
-        <!--이마트 샘플 여기서부터 for each 돌려서 마트를 뿌려야함-->
         <div class="row featured__filter">
+
+
+            <!--홈플러스-->
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="img/mart/emart.png">
-                        <!--좋아요-->
+                    <div class="featured__item__pic set-bg borderCircle" data-setbg="img/mart/homeplus.jpg">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a th:href="@{/clientMart/mart}"><i class="fa fa-heart"></i></a></li>
                         </ul>
-                        <!--좋아요-->
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--이마트-->
+            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="img/mart/emart.png">
+                        <ul class="featured__item__pic__hover">
+                            <li><a th:href="@{/clientMart/emart}"><i class="fa fa-heart"></i></a></li>
+                        </ul>
                     </div>
 
                 </div>
             </div>
+
+
+
+            <!--롯데마트-->
+            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="img/mart/lottemart.png">
+                        <ul class="featured__item__pic__hover">
+                            <li><a th:href="@{/clientMart/lottemart}"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!--코스트코-->
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="img/mart/costco.jpg">
+                        <ul class="featured__item__pic__hover">
+                            <li><a th:href="@{/clientMart/costco}"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 마트 두번째라인 -->
+<!--
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="img/mart/lottemart.png">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-        <!--여기까지 foreach 돌려야할 부분-->
-
-
     </div>
 </section>
-
 <!-- Featured Section End -->
 
 
