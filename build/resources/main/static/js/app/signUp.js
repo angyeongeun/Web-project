@@ -38,10 +38,9 @@ $("#signUpBtn").click(function (){
         method: 'POST',
         data: JSON.stringify(member),
         contentType: "application/json; charset=utf-8",
-        /*success: function (response) {
-            alert(response)
+        success: function (response) {
             window.location.href="/user/loginPage"
-        },*/
+        },
         error: function (response) {
             markingErrorField(response);
         }

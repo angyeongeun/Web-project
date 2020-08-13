@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메일 발송</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        body#mailSenderBody{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+            height: 100%;
+            padding:10px;}
+
+        .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
+        .panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
+        .form-control {
+            background: #f7f7f7 none repeat scroll 0 0;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            font-size: 14px;
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+
+        }
+        .main-div {
+            min-width: 300px;
+            max-width: 38%;
+            background: #ffffff none repeat scroll 0 0;
+            border-radius: 2px;
+            margin: 10px auto 30px;
+            min-height: 500px;
+            padding: 50px 70px 70px 71px;
+        }
+        .goBtn{
+/*
+            touch-action: manipulation;
+*/
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            display: inline-block;
+/*
+            white-space: normal;
+            member-select: none;
+            background-image: none;
+            display: inline-block;
+            align-items: center;
+*/
+            padding-left: 24px;
+            padding-right: 24px;
+            font-size: 15px;
+/*
+            height: auto;
+*/
+            background-color: rgb(67, 176, 42);
+            color: rgb(255, 255, 255);
+            width: 48%;
+/*
+            position: relative;
+            font-family: inherit;
+*/
+            min-height: 48px;
+            margin: 12px 0px 0px;
+        }
+
+    </style>
+</head>
+<body id="mailSenderBody">
+<div class="container">
+    <div class="mail-form">
+        <div id="main-content" class="" style="display: flex; flex-direction: column; background: white; width: 540px;
+                                                margin: 0px auto 20px; box-shadow: rgb(136,136,136) 2px 1px 20px; min-height: 350px">
+            <div style="margin: 0px auto; width: 380px;">
+                <div style="width: 100%; margin: auto; ">
+                    <span style="display: block; margin: 16px 0px 24px; text-align: center;">
+                        브랜드 로고 cartrapido
+                    </span>
+                    <h1 style="font-size: 22px; font-weight: 700; color: rgb(66,66,66); line-height: 1.3em; margin: 8px 0px 0px;
+                                text-align: center;">
+                        <span style="color: rgb(66,66,66); font-weight: bold;"> 비밀번호를 잊으셨나요?</span>
+                    </h1>
+                    <h2 style="font-size: 18px; font-weight: 600; color: rgb(117,117,117); line-height: 1.3em; margin: 8px 0px 16px;
+                                text-align: center;">
+                        이메일을 입력하시면 초기화 비밀번호를 알려드립니다.
+                    </h2>
+                    <form name="mailSendForm" id="mailSendForm" th:action="@{/mail}" >
+                        <div style="position: relative; ">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="emailSend" id="inputEmail"  placeholder="Email Address">
+                                <div id="emailDiv"></div>
+                            </div>
+                            <input type="button" id="mailSendBtn" value="비밀번호 초기화" style="touch-action: manipulation; cursor: pointer; border: 1px solid transparent; border-radius: 4px; font-weight: 600; white-space: normal; member-select: none;  background-image: none; display: block; align-items: center; padding-left: 24px; padding-right: 24px; font-size: 18px; height: auto; background-color: rgb(67, 176, 42); color: rgb(255, 255, 255); width: 100%; position: relative; font-family: inherit; min-height: 48px; margin: 12px 0px 0px;">
+                        </div>
+                    </form>
+                    <input type="button" id="loginBtn" class="goBtn" value="로그인하러 가기" onclick="window.location='/user/loginPage'" style="float:left;">
+                    <input type="button" id="signUpBtn" class="goBtn" value="회원가입하러가기" onclick="window.location='/'" style="float: right">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src ="/js/app/mailSend.js"></script>
+</body>
+</html>
