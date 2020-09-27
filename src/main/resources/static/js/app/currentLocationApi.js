@@ -16,9 +16,6 @@ var onSuccess = function(position) {
 
     ajax(start);
 
-
-
-
 };//onsuccess
 
 function ajax(start) {
@@ -55,11 +52,6 @@ function ajax(start) {
     });
 
 
-
-
-
-
-
 }
 
 
@@ -68,6 +60,7 @@ function ajax(start) {
 // onError Callback receives a PositionError object
 //
 function onError(error) {
+
     alert('code: '    + error.code    + '\n' +
         'message: ' + error.message + '\n');
 }
@@ -110,8 +103,6 @@ function clientLatlng(data) {
 
 
     }
-
-
 
 
 }
