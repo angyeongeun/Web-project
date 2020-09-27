@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>clientWebLayout</title>
 
-    <header th:replace="clientWeb/header :: headerFragment"/>
+    <header th:replace="/clientWeb/header :: headerFragment"/>
 
 </head>
 <body>
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row" style="padding-top: 50px">
 
-            <th:block th:include="clientWeb/martSidebar.html"  ></th:block>
+            <th:block th:include="/clientWeb/martSidebar.html"  ></th:block>
 
             <div class="col-lg-9 text-center">
                 <!--/*@thymesVar id="mart" type="java.lang.String"*/-->
@@ -79,7 +79,7 @@
 
 <!-- Categories Section Begin -->
 <section class="categories">
-    <th:block th:include="clientWeb/categoryMart.html"></th:block>
+    <th:block th:include="/clientWeb/categoryMart.html"></th:block>
 </section>
 <!-- Categories Section End -->
 
@@ -135,7 +135,7 @@
                         <h6><span th:text="${product.productName}" data-toggle="modal" data-target="#myModal"/></h6>
                         <h5> <span th:text="${product.productPrice}"/>원</h5>
                     </div>
-                    <th:block th:include="clientWeb/productModal.html" ></th:block>
+                    <th:block th:include="/clientWeb/productModal.html" ></th:block>
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@
 <!--</section>-->
 <!-- Product Section End -->
 
-<footer th:replace="clientWeb/footer :: footerFragment"/>
+<footer th:replace="/clientWeb/footer :: footerFragment"/>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">

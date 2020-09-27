@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>clientWebLayout</title>
 
-    <header th:replace="clientWeb/header :: headerFragment"/>
+    <header th:replace="/clientWeb/header :: headerFragment"/>
 
 </head>
 <body>
@@ -65,7 +65,7 @@
 
             <div class="col-lg-9 col-md-7">
                 <!--filter-->
-                <th:block th:include="clientWeb/filterItem.html" ></th:block>
+                <th:block th:include="/clientWeb/filterItem.html" ></th:block>
 
                 <!-- 제품 데이터 시작-->
                 <div class="row" id="product_item">
@@ -102,7 +102,7 @@
                     </div>
 
                     <!--모달-->
-                    <th:block th:include="clientWeb/productModal.html" ></th:block>
+                    <th:block th:include="/clientWeb/productModal.html" ></th:block>
                 </div><!-- 제품 데이터 끝-->
 
                 <!--페이징-->
@@ -129,7 +129,7 @@
 </section>
 <!-- Product Section End -->
 
-<footer th:replace="clientWeb/footer :: footerFragment"/>
+<footer th:replace="/clientWeb/footer :: footerFragment"/>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
