@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <title>MyPage</title>
 
-    <header th:replace="clientWeb/header :: headerFragment"></header>
+    <header th:replace="/clientWeb/header :: headerFragment"></header>
 
 </head>
 <body>
 
 <!--section부분 / what's in my bag-->
-<th:block th:include="clientWeb/wmSection.html"></th:block>
+<th:block th:include="/clientWeb/wmSection.html"></th:block>
 <!--section부분-->
 
 
@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
 
-            <th:block th:include="clientWeb/mypageSidebar.html"></th:block>
+            <th:block th:include="/clientWeb/mypageSidebar.html"></th:block>
 
             <div class="col-lg-8 col-md-7 order-md-1 order-1"
                  style="
@@ -50,7 +50,7 @@
 <!-- Blog Details Section End -->
 
 
-<footer th:replace="clientWeb/footer :: footerFragment"></footer>
+<footer th:replace="/clientWeb/footer :: footerFragment"></footer>
 
 
 </body>
