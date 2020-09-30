@@ -35,7 +35,6 @@ $("#searchBtn").click(function () {
                 }
                 html +='</tr>';
                 $('#userInfo').append(html);
-                $('.cancleBtn').attr("data-email",items.email);
 
 
         });
@@ -58,12 +57,16 @@ $("#searchBtn").click(function () {
 });
 
 $("#userInfo").on("click",".cancleBtn",function () {
-
+    $(this).parents("tr").children().first().text();
+/*
+    alert($(this).parents("tr").children().first().text());
+*/
     var $selectedBtn = $(this);
+
     $.ajax({
         method: 'POST',
         url: '/admin/deblock',
-        data: "user="+$(this).data('email')
+        data: "user="+ $(this).parents("tr").children().first().text()
     }).done(function () {
 
         $selectedBtn.hide();
@@ -93,7 +96,7 @@ function pageClick(i) {
             var useremail = items.email;
             var html ='';
             html +='<tr>';
-            html +='<td>'+items.email+'</td>';
+            html +='<td class="email">'+items.email+'</td>';
             html +='<td>'+items.name+'</td>';
             html +='<td>'+items.address+'</td>';
             html +='<td>'+items.role+'</td>';
@@ -105,7 +108,6 @@ function pageClick(i) {
             }
             html +='</tr>';
             $('#userInfo').append(html);
-            $('.cancleBtn').attr("data-email",items.email);
 
 
         });
