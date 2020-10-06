@@ -1,5 +1,5 @@
 # What's in my cart?
-instacart-like web application build up
+WHAT'S IN MY CART web application build up
 
 application-oauth.properties,
 application.properties 은 보안상 ignored
