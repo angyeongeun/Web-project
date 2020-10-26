@@ -1,4 +1,4 @@
-package com.cartrapido.main.service.crawlingServicce;
+package com.cartrapido.main.service.crawling;
 
 import com.cartrapido.main.domain.repository.ProductRepository;
 import com.cartrapido.main.web.dto.ProductDTO;
@@ -9,12 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class EmartCrawlingService {
