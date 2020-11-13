@@ -1,4 +1,6 @@
 # What's in my cart?
+
+![Vynchronize Screenshot](https://github.com/angyeongeun/What-s-In-My-Cart/blob/master/src/main/resources/static/img/20201110140735.png)
 WHAT'S IN MY CART web application build up
 
 application-oauth.properties,
